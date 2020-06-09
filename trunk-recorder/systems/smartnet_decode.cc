@@ -149,6 +149,10 @@ static smartnet_packet parse(const char *in) {
 	pkt.address ^= 0x33C7;
 	pkt.command ^= 0x032A;
 
+	// The ID LSB indicates whether this is a broadcast or individual call.
+	// We don't care, mask it.
+	pkt.address &= 0xFFFE;
+
 	return pkt;
 }
 
